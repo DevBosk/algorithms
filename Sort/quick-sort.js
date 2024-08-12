@@ -1,10 +1,9 @@
-const INPUT_ARRAY = [1, 5, 3, 69, 8, 9, 10, 15, 0, 3];
+const INPUT_ARRAY = [100, -3, 2, 4, 6, 9, 1, 2, 5, 3, 23];
 
-function QuickSort(arr) {
+function MyQuickSort(arr) {
   if (arr.length <= 1) {
     return arr;
   }
-  console.log("INPUT ARR: ", arr);
   let count = 0;
 
   for (let i = 1; i < arr.length; i++) {
@@ -18,23 +17,55 @@ function QuickSort(arr) {
     }
   }
 
-  console.log("COUNT", count);
   if (count === 0) {
     count++;
   } else {
-    console.log("PreSorted ARR: ", arr);
     let element = arr.splice(0, 1)[0];
     arr.splice(count, 0, element);
-    console.log("moved first element: ", arr);
   }
 
   const leftPart = arr.slice(0, count);
   const rightPart = arr.slice(count);
 
-  console.log("leftpart", leftPart);
-  console.log("rightpart", rightPart);
-
-  return QuickSort(leftPart).concat(QuickSort(rightPart));
+  return MyQuickSort(leftPart).concat(MyQuickSort(rightPart));
 }
 
-console.log("result: ", QuickSort(INPUT_ARRAY));
+console.time("my");
+console.log("my result: ", MyQuickSort(INPUT_ARRAY));
+console.timeEnd("my");
+
+function pivot(arr, start = 0, end = arr.length - 1) {
+  const swap = (arr, idx1, idx2) => {
+    [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]];
+  };
+
+  // We are assuming the pivot is always the first element
+  let pivot = arr[start];
+  let swapIdx = start;
+
+  for (let i = start + 1; i <= end; i++) {
+    if (pivot > arr[i]) {
+      swapIdx++;
+      swap(arr, swapIdx, i);
+    }
+  }
+
+  // Swap the pivot from the start the swapPoint
+  swap(arr, start, swapIdx);
+  return swapIdx;
+}
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  if (left < right) {
+    let pivotIndex = pivot(arr, left, right); //3
+    //left
+    quickSort(arr, left, pivotIndex - 1);
+    //right
+    quickSort(arr, pivotIndex + 1, right);
+  }
+  return arr;
+}
+
+console.time("opt");
+console.log("opt result: ", quickSort(INPUT_ARRAY));
+console.timeEnd("opt");
