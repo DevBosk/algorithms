@@ -45,6 +45,34 @@ class SinglyLinkedList {
     }
     return current;
   }
+
+  shift() {
+    if (!this.head) return undefined;
+
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    this.length--;
+
+    if (this.length === 0) {
+      this.tail = null;
+    }
+
+    return currentHead;
+  }
+
+  unshift(val) {
+    let newHead = new Node(val);
+
+    if (!this.head) {
+      this.head = newHead;
+      this.tail = newHead;
+    } else {
+      newHead.next = this.head;
+      this.head = newHead;
+    }
+    this.length++;
+    return this;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -54,6 +82,8 @@ list.push("Guys");
 list.push("!");
 
 console.log(list.pop());
-console.log(list.pop());
+console.log(list.shift());
+
+console.log(list.unshift("13"));
 
 console.log(list);
