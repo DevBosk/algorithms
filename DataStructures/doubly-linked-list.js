@@ -143,6 +143,28 @@ class DoublyLinkedList {
     this.length--;
     return foundNode;
   }
+
+  reverse() {
+    if (this.length === 0) return this;
+    let newHead = this.tail;
+    let newTail = this.head;
+
+    let tempPrev = newHead;
+    let temp = this.tail.prev;
+    while (temp !== null) {
+      let nPrev = temp.prev;
+      temp.prev = tempPrev;
+      tempPrev.next = temp;
+      tempPrev = temp;
+      temp = nPrev;
+    }
+
+    newTail.next = null;
+    this.tail = newTail;
+    newHead.prev = null;
+    this.head = newHead;
+    return this;
+  }
 }
 
 const d = new DoublyLinkedList();
