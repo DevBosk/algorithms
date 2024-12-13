@@ -37,6 +37,24 @@ class BST {
             }
         }
     }
+
+    find(val) {
+        if(!this.root) return false;
+        let current = this.root;
+        let found = false;
+        while(current && !found) {
+            if(val < current.value) {
+                current = current.left;
+            } else if(val > current.value) {
+                current = current.right;
+            } else {
+                found = true;
+            }
+        }
+
+        if(!found) return undefined;
+        return current;
+    }
 }
 let rootNode = new Node(10);
 let bst = new BST(rootNode);
@@ -46,4 +64,5 @@ bst.insert(7);
 bst.insert(25);
 bst.insert(77);
 bst.insert(45);
+console.log(bst.find(77));
 console.log(JSON.stringify(bst));
