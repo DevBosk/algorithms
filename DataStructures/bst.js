@@ -1,4 +1,4 @@
-class Node {
+export class Node {
     constructor(val) {
         this.value = val;
         this.left = null;
@@ -6,7 +6,7 @@ class Node {
     }
 }
 
-class BST {
+export class BST {
     constructor(root) {
         this.root = root;
     }
@@ -56,6 +56,7 @@ class BST {
         return current;
     }
 }
+
 let rootNode = new Node(10);
 let bst = new BST(rootNode);
 bst.insert(5);
@@ -64,5 +65,5 @@ bst.insert(7);
 bst.insert(25);
 bst.insert(77);
 bst.insert(45);
-console.log(bst.find(77));
-console.log(JSON.stringify(bst));
+// console.log(bst.find(77));
+// console.log(JSON.stringify(bst));
