@@ -55,6 +55,45 @@ export class BST {
         if(!found) return undefined;
         return current;
     }
+
+    DFSPreOrder() {
+        const list = [];
+        const current = this.root;
+
+        function traverse(node) {
+            list.push(node.value);
+
+            if (node.left) {
+                traverse(node.left);
+            }
+            if (node.right) {
+                traverse(node.right);
+            }
+        }
+
+        traverse(current);
+
+        return list;
+    }
+
+    DFSPostOrder() {
+        const list = [];
+        const current = this.root;
+
+        function traverse(node) {
+            if (node.left) {
+                traverse(node.left);
+            }
+            if (node.right) {
+                traverse(node.right);
+            }
+            list.push(node.value);
+        }
+
+        traverse(current);
+
+        return list;
+    }
 }
 
 let rootNode = new Node(10);
